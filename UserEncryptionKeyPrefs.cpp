@@ -31,7 +31,7 @@ guint UserEncryptionKeyPrefs::sKeyCount = 0;
 
 UAT_BUFFER_CB_DEF(MessageEncryptionKey, encKey, MessageEncryptionKey, dataEncKey, dataEncKeyLen);
 
-static gboolean
+static bool
 MessageEncryptionKey_encKey_check_cb(void *rec, const char *ptr, unsigned len, const void *chk_data, const void *fld_data, char **err)
 {
     if (len != kDataEncKeyLength_AES128CCM) {
@@ -43,7 +43,7 @@ MessageEncryptionKey_encKey_check_cb(void *rec, const char *ptr, unsigned len, c
 }
 
 static void *
-MessageEncryptionKey_copy_cb(void *dest, const void *orig, size_t len _U_)
+MessageEncryptionKey_copy_cb(void *dest, const void *orig, size_t len)
 {
     MessageEncryptionKey *d = (MessageEncryptionKey *)dest;
     MessageEncryptionKey *o = (MessageEncryptionKey *)orig;
@@ -51,14 +51,14 @@ MessageEncryptionKey_copy_cb(void *dest, const void *orig, size_t len _U_)
     d->keyId = o->keyId;
     d->sessionType = o->sessionType;
 
-    d->dataEncKey = (char *)g_memdup(o->dataEncKey, o->dataEncKeyLen);
+    d->dataEncKey = (unsigned char *)g_memdup(o->dataEncKey, o->dataEncKeyLen);
     d->dataEncKeyLen = o->dataEncKeyLen;
 
     return dest;
 }
 
-static gboolean
-MessageEncryptionKey_update_cb(void *rec _U_, char **err _U_)
+static bool
+MessageEncryptionKey_update_cb(void *rec, char **err)
 {
     MessageEncryptionKey *r = (MessageEncryptionKey *)rec;
 

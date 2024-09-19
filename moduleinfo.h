@@ -16,7 +16,7 @@
 #endif
 
 /* Name of package */
-#define PACKAGE "matter"
+#define PACKAGE "matter2"
 
 
 #ifdef VERSION

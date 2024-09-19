@@ -195,7 +195,7 @@ static const char *BleFormatError(int32_t err, const char *description)
  */
 static const char *MatterFormatError(int32_t err, const char *description)
 {
-    return SubsystemFormatError("Matter", err, description);
+    return SubsystemFormatError("Matter2", err, description);
 }
 
 #endif // #if !(MATTER_CONFIG_SHORT_ERROR_STR)
@@ -399,7 +399,7 @@ const char *ErrorStr(int32_t err)
     // Note this is the only case, and the actual printout is different when MATTER_CONFIG_SHORT_ERROR_STR is defined
 
     if (err >= MATTER_ERROR_MIN && err <= MATTER_ERROR_MAX)
-        return SubsystemFormatError("Matter", (int)err);
+        return SubsystemFormatError("Matter2", (int)err);
 
     // note the actual printout is different when MATTER_CONFIG_SHORT_ERROR_STR is defined
     return FormatError((int)err);
